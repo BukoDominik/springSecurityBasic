@@ -98,12 +98,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/css/**", "/").permitAll()
                 .antMatchers("/user/**", "/user").hasRole("USER")
                 .and()
                 .formLogin();
     }
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
