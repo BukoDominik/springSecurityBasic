@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: dominik
@@ -18,6 +19,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Filmoznajd</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+<sec:authorize access="hasRole('USER')">
+            <a class="nav-item nav-link" href="/movieSearch">Movie search</a>
+            <a class="nav-item nav-link" href="/showWatched">Show Watched</a>
+            <a class="nav-item nav-link" href="/showToWatch">Show to watch</a>
+</sec:authorize>
+            <a class="nav-item nav-link" href="/login">Login</a>
+            <a class="nav-item nav-link" href="/registerUser">Register</a>
+        </div>
+    </div>
+</nav>
+<sec:authorize access="hasRole('USER')">
 <div class="container card">
     <div class="pageheader">
         <h1>Witaj w wyszukiwarce filmów!</h1>
@@ -35,6 +54,6 @@
         <button class="btn btn-light" type="submit">SZUKAJ</button>
     </div>
 </form>
-
+</sec:authorize>
 </body>
 </html>

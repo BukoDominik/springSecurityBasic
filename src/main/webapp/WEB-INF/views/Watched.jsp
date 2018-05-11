@@ -30,6 +30,22 @@
 
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Filmoznajd</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/movieSearch">Movie search</a>
+            <a class="nav-item nav-link" href="/showWatched">Show Watched</a>
+            <a class="nav-item nav-link" href="/showToWatch">Show to watch</a>
+            <a class="nav-item nav-link" href="/login">Login</a>
+            <a class="nav-item nav-link" href="/registerUser">Register</a>
+        </div>
+    </div>
+</nav>
 <div class="container card">
     <div class="pageheader">
         <h1>Witaj w wyszukiwarce filmów!</h1>
@@ -70,22 +86,6 @@
                         <div class="col-md-6">
                             <h4>${movie.orginalTitle}</h4>
                             <p><strong>Data publikacji: </strong>${movie.date}</p>
-                                <%--@elvariable id="movieToAdd" type="pl.coderslab.springsecurity.model.Movie"--%>
-                            <form:form method="post" action="addToWatch" modelAttribute="movieToAdd">
-                                <form:hidden path="orginalTitle" name="originalTitle" value="${movie.orginalTitle}"/>
-                                <form:hidden path="posterURL" name="posterUrl" value="${movie.posterURL}"/>
-                                <form:hidden path="date" name="date" value="${movie.date}"/>
-                                <form:hidden path="overview" name="title" value="${movie.overview}"/>
-                                <button type="submit" class="btn btn-primary pull-right">Do Obejrzenia</button>
-                            </form:form>
-                                <%--@elvariable id="movieToAdd" type="pl.coderslab.springsecurity.model.Movie"--%>
-                            <form:form method="post" action="addWatched" modelAttribute="movieToAdd">
-                                <form:hidden path="orginalTitle" name="originalTitle" value="${movie.orginalTitle}"/>
-                                <form:hidden path="posterURL" name="posterUrl" value="${movie.posterURL}"/>
-                                <form:hidden path="date" name="date" value="${movie.date}"/>
-                                <form:hidden path="overview" name="title" value="${movie.overview}"/>
-                                <button type="submit" class="btn btn-primary pull-right">Obejrzane</button>
-                            </form:form>
                         </div>
                     </div><!-- row -->
                 </div><!-- well -->

@@ -4,6 +4,8 @@ package pl.coderslab.springsecurity.controller;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +30,6 @@ import static pl.coderslab.springsecurity.model.JsonReader.readJsonFromUrl;
 public class searchController {
     @Autowired
     MovieRepository movieRepository;
-
     @GetMapping("/search")
     public String useSearch(){
     return "searchForm";
@@ -93,20 +94,23 @@ public class searchController {
         movieRepository.save(movie);
         return "redirect:movieSearch";
     }
+    @Secured("ROLE_USER")
     @GetMapping("/showWatched")
     public String showWatched(Model model, Principal principal){
         List<Movie> allMovies = movieRepository.findAll();
-        List<Movie> movieList = null ;
+        List<Movie> movieList = new ArrayList<Movie>() ;
         for (Movie movie: allMovies) {
-            if (movie.getUsername() == principal.getName()){
-                if (movie.getWatched())
-                movieList.add(movie);
+            if (principal.getName().equals(movie.getUsername())){
+                if (movie.getWatched()) {
+                    movieList.add(movie);
+                }
             }
         model.addAttribute("movies", movieList);
             model.addAttribute("movieToAdd", new Movie());
         }
-        return "resultMovie";
+        return "toWatch";
     }
+    @Secured("ROLE_USER")
     @GetMapping("/showToWatch")
     public String showToWatch(Model model, Principal principal){
         List<Movie> allMovies = movieRepository.findAll();
@@ -114,13 +118,14 @@ public class searchController {
         String currentUserName = principal.getName();
         for (Movie movie: allMovies) {
             if (currentUserName.equals(movie.getUsername())){
-                if (movie.getToWatch())
-                movieList.add(movie);
+                if (movie.getToWatch()) {
+                    movieList.add(movie);
+                }
             }
         }
         model.addAttribute("movies", movieList);
         model.addAttribute("movieToAdd", new Movie());
-        return "resultMovie";
+        return "toWatch";
     }
 
 }

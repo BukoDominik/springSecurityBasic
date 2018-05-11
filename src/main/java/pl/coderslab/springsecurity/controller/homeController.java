@@ -22,17 +22,7 @@ public class homeController {
     UserNameRepository userNameRepository;
     @GetMapping("/")
     public String getRequest(){
-        return "user";
-    }
-    @GetMapping("/admin")
-    @ResponseBody
-    public String adminRequest(){
-        return "BYYYYCH";
-    }
-    @GetMapping("/home")
-    @ResponseBody
-    public String getHome(){
-        return "Allah Akbar";
+        return "searchMovie";
     }
     @GetMapping("/registerUser")
     public  String registerUser(Model model){

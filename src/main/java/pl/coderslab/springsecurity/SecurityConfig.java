@@ -2,6 +2,7 @@ package pl.coderslab.springsecurity;
 
 import javax.sql.DataSource;
 
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -90,6 +91,7 @@ CREATE TABLE acl_entry (
  */
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -103,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/").permitAll()
                 .antMatchers("/user/**", "/user").hasRole("USER")
                 .and()
-                .formLogin();
+                .formLogin().defaultSuccessUrl("/movieSearch", true);
     }
 
 
